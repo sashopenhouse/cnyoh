@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background: #FDFBF7;
-  --foreground: #333333;
-  --tan: #D2B48C;
-  --cream: #FDFBF7;
-  --charcoal: #333333;
-  --sage: #7C8C6E;
+  --background: #F8F9FB;
+  --foreground: #1E2028;
+  --accent: #4A6FA5;
+  --canvas: #F8F9FB;
+  --ink: #1E2028;
+  --mist: #EEF0F5;
 }
 
 @layer base {
@@ -18,12 +18,14 @@
   }
 
   body {
-    color: #333333;
-    background: #FDFBF7;
+    color: #1E2028;
+    background: #F8F9FB;
+    font-family: var(--font-lora), Georgia, serif;
   }
 
-  h1, h2, h3, h4 {
-    font-family: var(--font-playfair), Georgia, serif;
+  /* Headings use DM Sans — geometric, unisex, tech-forward */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
   }
 
   /* Smooth scrollbar */
@@ -31,10 +33,10 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #F5F0E8;
+    background: #EEF0F5;
   }
   ::-webkit-scrollbar-thumb {
-    background: #D2B48C;
+    background: #4A6FA5;
     border-radius: 3px;
   }
 }
@@ -45,19 +47,19 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 bg-charcoal text-cream px-8 py-4 text-sm font-medium tracking-widest uppercase transition-all duration-300 hover:bg-tan hover:text-charcoal;
+    @apply inline-flex items-center gap-2 bg-ink text-canvas px-8 py-4 text-sm font-sans font-medium tracking-widest uppercase transition-all duration-300 hover:bg-accent hover:text-canvas;
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 border border-charcoal text-charcoal px-8 py-4 text-sm font-medium tracking-widest uppercase transition-all duration-300 hover:bg-charcoal hover:text-cream;
+    @apply inline-flex items-center gap-2 border border-ink text-ink px-8 py-4 text-sm font-sans font-medium tracking-widest uppercase transition-all duration-300 hover:bg-ink hover:text-canvas;
   }
 
   .label-tag {
-    @apply text-xs font-medium tracking-[0.2em] uppercase text-tan;
+    @apply text-xs font-sans font-medium tracking-[0.2em] uppercase text-accent;
   }
 
   .divider {
-    @apply w-12 h-px bg-tan;
+    @apply w-12 h-px bg-accent/40;
   }
 
   /* GSAP initial hidden state */

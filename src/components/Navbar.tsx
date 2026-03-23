@@ -6,8 +6,9 @@ import { Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "Why Us", href: "#why" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Newsletter", href: "#newsletter" },
+  { label: "Our Work", href: "#portfolio" },
+  { label: "Watch", href: "#watch" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -43,11 +44,11 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="w-8 h-8 border border-tan flex items-center justify-center">
-              <span className="font-serif text-xs font-bold text-tan">C</span>
+              <span className="font-sans font-bold text-xs text-accent">C</span>
             </div>
             <div>
-              <span className="font-serif text-base font-bold text-charcoal tracking-tight leading-none block">
-                CNY Open House
+              <span className="font-sans font-bold text-base text-ink tracking-tight leading-none block">
+                CNY&apos;s Open House
               </span>
               <span className="text-[10px] text-tan tracking-[0.2em] uppercase leading-none">
                 Since 2007
@@ -67,7 +68,7 @@ export default function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-tan group-hover:w-full transition-all duration-300" />
               </a>
             ))}
-            <a href="#newsletter" className="btn-primary text-xs py-3 px-6">
+            <a href="#contact" className="btn-primary text-xs py-3 px-6">
               Become the Expert
             </a>
           </div>

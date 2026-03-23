@@ -1,29 +1,32 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { DM_Sans, Lora } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+// DM Sans — geometric, tech-forward, unisex. Used for all headings.
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-dm-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const inter = Inter({
+// Lora — refined serif with editorial warmth. Used for body/paragraph text.
+const lora = Lora({
   subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-lora",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "CNY Open House | Local Experts. Modern Media.",
+  title: "CNY's Open House | Local Experts. Modern Media.",
   description:
     "Positioning your business as the authority in Central New York since 2007. TV, video, podcasts, and digital distribution.",
   openGraph: {
-    title: "CNY Open House | Local Experts. Modern Media.",
+    title: "CNY's Open House | Local Experts. Modern Media.",
     description: "Positioning your business as the authority since 2007.",
-    siteName: "CNY Open House",
+    siteName: "CNY's Open House",
   },
 };
 
@@ -35,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${playfair.variable} ${inter.variable} font-sans antialiased bg-cream text-charcoal`}
+        className={`${dmSans.variable} ${lora.variable} font-sans antialiased bg-canvas text-ink`}
       >
         {children}
       </body>

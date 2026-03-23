@@ -135,10 +135,10 @@ export default function HowItWorks() {
           <div ref={headingRef} className="opacity-0 lg:sticky lg:top-32">
             <span className="label-tag">The Process</span>
             <div className="divider mt-4 mb-6" />
-            <h2 className="font-serif text-display-lg text-charcoal leading-tight mb-6">
+            <h2 className="font-sans font-bold text-display-lg text-ink tracking-tight mb-6">
               How It
               <br />
-              <em className="not-italic text-tan">Works</em>
+              <span className="text-accent">Works</span>
             </h2>
             <p className="text-charcoal/60 text-lg font-light leading-relaxed mb-8">
               Three clear steps from discovery to distribution. We handle the
@@ -149,12 +149,12 @@ export default function HowItWorks() {
             <div className="hidden lg:block">
               <div className="w-full h-px bg-gradient-to-r from-tan/40 to-transparent mb-8" />
               <blockquote className="border-l-2 border-tan pl-6">
-                <p className="font-serif text-xl text-charcoal/80 italic leading-relaxed">
+                <p className="font-serif text-xl text-ink/70 italic leading-relaxed">
                   &ldquo;When viewers see you on our platform, they don&apos;t
                   see an ad. They see an expert.&rdquo;
                 </p>
                 <footer className="mt-4 text-xs text-charcoal/40 tracking-widest uppercase">
-                  — CNY Open House Philosophy
+                  — CNY&apos;s Open House Philosophy
                 </footer>
               </blockquote>
             </div>
@@ -181,11 +181,11 @@ export default function HowItWorks() {
                     {/* Content */}
                     <div className={`pb-12 ${isLast ? "" : ""}`}>
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="font-serif text-4xl font-bold text-tan/30 leading-none">
+                        <span className="font-sans font-bold text-4xl text-accent/20 leading-none tabular-nums">
                           {step.number}
                         </span>
                       </div>
-                      <h3 className="font-serif text-2xl text-charcoal mb-3 leading-snug">
+                      <h3 className="font-sans font-semibold text-2xl text-ink mb-3 leading-[1.3] tracking-tight">
                         {step.title}
                       </h3>
                       <p className="text-charcoal/60 leading-relaxed mb-4 font-light">

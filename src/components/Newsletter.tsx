@@ -3,13 +3,22 @@
 import { useEffect, useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { gsap } from "@/lib/gsap";
-import { subscribeToNewsletter, type NewsletterState } from "@/app/actions/newsletter";
-import { ArrowRight, CheckCircle, AlertCircle, Mail } from "lucide-react";
+import { submitContactForm, type ContactState } from "@/app/actions/newsletter";
+import { ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 
-const initialState: NewsletterState = {
-  success: false,
-  message: "",
-};
+const initialState: ContactState = { success: false, message: "" };
+
+const services = [
+  "TV Segments",
+  "Video Production",
+  "Podcast Series",
+  "App Distribution",
+  "Full Platform Package",
+  "Not sure yet",
+];
+
+const inputClass =
+  "w-full px-4 py-3 bg-canvas border border-ink/12 text-ink text-sm font-sans placeholder:text-ink/30 focus:outline-none focus:border-accent transition-colors duration-200";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -17,16 +26,16 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="btn-primary whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+      className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
     >
       {pending ? (
         <span className="flex items-center gap-2">
-          <span className="w-4 h-4 border-2 border-cream/40 border-t-cream rounded-full animate-spin" />
-          Subscribing...
+          <span className="w-4 h-4 border-2 border-canvas/40 border-t-canvas rounded-full animate-spin" />
+          Sending...
         </span>
       ) : (
         <span className="flex items-center gap-2">
-          Stay Informed
+          Send My Inquiry
           <ArrowRight size={16} />
         </span>
       )}
@@ -34,124 +43,175 @@ function SubmitButton() {
   );
 }
 
-export default function Newsletter() {
+export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
-  const [state, formAction] = useFormState(subscribeToNewsletter, initialState);
+  const [state, formAction] = useFormState(submitContactForm, initialState);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        contentRef.current,
+        leftRef.current,
         { opacity: 0, y: 32 },
         {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
+          opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", toggleActions: "play none none none" },
         }
       );
-
       gsap.fromTo(
         formRef.current,
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 32 },
         {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          delay: 0.2,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
+          opacity: 1, y: 0, duration: 0.9, ease: "power3.out", delay: 0.15,
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", toggleActions: "play none none none" },
         }
       );
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      id="newsletter"
-      className="relative py-section bg-warm-100 overflow-hidden"
+      id="contact"
+      className="relative py-section bg-mist overflow-hidden"
     >
-      {/* Background accents */}
+      {/* Accents */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-tan/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-tan/30 to-transparent" />
-        <div className="absolute -left-32 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-tan/8 blur-3xl" />
-        <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-sage/8 blur-3xl" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+        <div className="absolute -right-40 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-accent/5 blur-3xl" />
       </div>
 
       <div className="relative z-10 section-padding max-w-screen-xl mx-auto">
-        <div className="max-w-2xl mx-auto text-center">
-          {/* Icon */}
-          <div className="w-14 h-14 border border-tan/40 flex items-center justify-center mx-auto mb-8">
-            <Mail size={22} className="text-tan" />
-          </div>
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-          {/* Content */}
-          <div ref={contentRef} className="opacity-0">
-            <span className="label-tag">Stay Informed</span>
-            <div className="divider mt-4 mb-6 mx-auto" />
-            <h2 className="font-serif text-display-md text-charcoal mb-4">
-              Get the CNY Open House
+          {/* Left: copy */}
+          <div ref={leftRef} className="opacity-0 lg:sticky lg:top-32">
+            <span className="label-tag">Work With Us</span>
+            <div className="divider mt-4 mb-6" />
+            <h2 className="font-sans font-bold text-display-lg text-ink tracking-tight mb-6">
+              Let&apos;s Make You
               <br />
-              <em className="not-italic text-tan">Insider Newsletter</em>
+              <span className="text-accent">the Authority</span>
             </h2>
-            <p className="text-charcoal/60 text-lg font-light leading-relaxed mb-10">
-              Home improvement trends, local market insights, and exclusive
-              opportunities to feature your business — delivered to your inbox.
+            <p className="font-serif text-ink/60 text-lg leading-relaxed mb-10">
+              Tell us about your business and goals. We&apos;ll reach out within
+              one business day to talk through how CNY&apos;s Open House can
+              position you as the go-to expert in your category.
             </p>
+
+            {/* What to expect */}
+            <div className="space-y-4">
+              {[
+                { step: "01", text: "We review your inquiry and research your category" },
+                { step: "02", text: "A quick discovery call to align on goals" },
+                { step: "03", text: "A custom content plan built around your business" },
+              ].map(({ step, text }) => (
+                <div key={step} className="flex items-start gap-4">
+                  <span className="font-sans font-bold text-sm text-accent/40 tabular-nums mt-0.5 flex-shrink-0">{step}</span>
+                  <p className="font-serif text-ink/60 text-sm leading-relaxed">{text}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Form */}
+          {/* Right: form */}
           <div ref={formRef} className="opacity-0">
             {state.success ? (
-              <div className="flex flex-col items-center gap-4 py-8">
-                <div className="w-16 h-16 rounded-full bg-sage/10 flex items-center justify-center">
-                  <CheckCircle size={32} className="text-sage" />
+              <div className="flex flex-col items-center gap-5 py-16 text-center">
+                <div className="w-16 h-16 bg-accent/10 flex items-center justify-center">
+                  <CheckCircle size={32} className="text-accent" />
                 </div>
-                <p className="font-serif text-xl text-charcoal">{state.message}</p>
-                <p className="text-charcoal/50 text-sm">
-                  Check your inbox for a confirmation.
+                <p className="font-sans font-semibold text-xl text-ink">{state.message}</p>
+                <p className="font-serif text-ink/50 text-sm max-w-xs">
+                  In the meantime, feel free to follow us on social media.
                 </p>
               </div>
             ) : (
-              <form action={formAction} className="space-y-4">
-                <div className="flex flex-col sm:flex-row gap-0 shadow-card">
+              <form action={formAction} className="space-y-4 bg-canvas p-8 shadow-card">
+                {/* Name + Business */}
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="font-sans text-xs font-medium tracking-widest uppercase text-ink/50 block mb-2">
+                      Your Name <span className="text-accent">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="Jane Smith"
+                      className={inputClass}
+                    />
+                  </div>
+                  <div>
+                    <label className="font-sans text-xs font-medium tracking-widest uppercase text-ink/50 block mb-2">
+                      Business Name
+                    </label>
+                    <input
+                      type="text"
+                      name="business"
+                      placeholder="Acme Roofing Co."
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="font-sans text-xs font-medium tracking-widest uppercase text-ink/50 block mb-2">
+                    Email Address <span className="text-accent">*</span>
+                  </label>
                   <input
                     type="email"
                     name="email"
                     required
-                    placeholder="your@email.com"
-                    className="flex-1 px-6 py-4 bg-cream border border-charcoal/15 text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-tan transition-colors duration-200 text-sm"
-                    aria-label="Email address"
+                    placeholder="you@yourbusiness.com"
+                    className={inputClass}
                   />
-                  <SubmitButton />
                 </div>
 
-                {/* Error message */}
+                {/* Service interest */}
+                <div>
+                  <label className="font-sans text-xs font-medium tracking-widest uppercase text-ink/50 block mb-2">
+                    I&apos;m Interested In
+                  </label>
+                  <select name="service" className={inputClass}>
+                    <option value="">Select a service...</option>
+                    {services.map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="font-sans text-xs font-medium tracking-widest uppercase text-ink/50 block mb-2">
+                    Tell Us About Your Goals <span className="text-accent">*</span>
+                  </label>
+                  <textarea
+                    name="message"
+                    required
+                    rows={4}
+                    placeholder="What does your business do, who are your ideal customers, and what would success look like?"
+                    className={`${inputClass} resize-none`}
+                  />
+                </div>
+
+                {/* Error */}
                 {!state.success && state.message && (
-                  <div className="flex items-center gap-2 text-sm text-red-600 justify-center">
+                  <div className="flex items-center gap-2 text-sm text-red-600">
                     <AlertCircle size={14} />
                     <span>{state.message}</span>
                   </div>
                 )}
 
-                <p className="text-xs text-charcoal/35 tracking-wide">
-                  No spam. Unsubscribe anytime. We respect your privacy.
+                <SubmitButton />
+
+                <p className="font-sans text-xs text-ink/30 tracking-wide text-center pt-1">
+                  We respond within 1 business day. No spam, ever.
                 </p>
               </form>
             )}

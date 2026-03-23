@@ -33,7 +33,7 @@ const features = [
     icon: TrendingUp,
     title: "17+ Years of Local Trust",
     description:
-      "Since 2007, CNY Open House has been the region's go-to source for home improvement expertise. That trust transfers to you.",
+      "Since 2007, CNY's Open House has been the region's go-to source for home improvement expertise. That trust transfers to you.",
     stat: "Since 2007",
     statLabel: "Established",
   },
@@ -93,33 +93,31 @@ export default function Features() {
     <section
       ref={sectionRef}
       id="why"
-      className="relative py-section bg-charcoal overflow-hidden"
+      className="relative py-section bg-ink overflow-hidden"
     >
-      {/* Background texture */}
+      {/* Background grid texture */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1px 1px, #D2B48C 1px, transparent 0)",
-          backgroundSize: "32px 32px",
+            "linear-gradient(rgba(74,111,165,1) 1px, transparent 1px), linear-gradient(90deg, rgba(74,111,165,1) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
         }}
         aria-hidden="true"
       />
 
-      {/* Warm accent */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-tan/40 to-transparent" />
+      {/* Cool accent top line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
       <div className="relative z-10 section-padding max-w-screen-xl mx-auto">
         {/* Section header */}
         <div ref={headingRef} className="opacity-0 max-w-2xl mb-20">
-          <span className="label-tag text-tan/80">The Value Proposition</span>
-          <div className="divider mt-4 mb-6 bg-tan/40" />
-          <h2 className="font-serif text-display-lg text-cream leading-tight mb-6">
-            Why CNY Open House
-            <br />
-            <em className="not-italic text-tan">Works for You</em>
+          <span className="label-tag text-accent/80">The Value Proposition</span>
+          <div className="divider mt-4 mb-6" />
+          <h2 className="font-sans font-bold text-display-lg text-canvas tracking-tight mb-6">
+            Why CNY&apos;s Open House <span className="text-accent">Works for You</span>
           </h2>
-          <p className="text-cream/60 text-lg font-light leading-relaxed">
+          <p className="font-serif text-canvas/60 text-lg leading-relaxed">
             We&apos;re not an ad agency. We&apos;re a media platform built on
             local trust — and we put that trust behind your business.
           </p>
@@ -128,40 +126,40 @@ export default function Features() {
         {/* Feature cards */}
         <div
           ref={cardsRef}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-cream/10"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-canvas/5"
         >
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
               <div
                 key={feature.title}
-                className="feature-card opacity-0 group bg-charcoal p-8 lg:p-10 hover:bg-charcoal-light transition-colors duration-300 cursor-default"
+                className="feature-card opacity-0 group bg-ink p-8 lg:p-10 hover:bg-ink-light transition-colors duration-300 cursor-default"
               >
                 {/* Icon */}
-                <div className="w-12 h-12 border border-tan/30 flex items-center justify-center mb-8 group-hover:border-tan/60 transition-colors duration-300">
-                  <Icon size={20} className="text-tan" />
+                <div className="w-12 h-12 border border-accent/30 flex items-center justify-center mb-8 group-hover:border-accent/70 transition-colors duration-300">
+                  <Icon size={20} className="text-accent" />
                 </div>
 
                 {/* Stat */}
                 <div className="mb-6">
-                  <p className="font-serif text-3xl font-bold text-cream">
+                  <p className="font-sans font-bold text-3xl text-canvas">
                     {feature.stat}
                   </p>
-                  <p className="text-xs text-tan/70 tracking-widest uppercase mt-1">
+                  <p className="font-sans text-xs text-steel/70 tracking-widest uppercase mt-1">
                     {feature.statLabel}
                   </p>
                 </div>
 
                 {/* Content */}
-                <h3 className="font-serif text-xl text-cream mb-3 leading-snug">
+                <h3 className="font-sans font-semibold text-xl text-canvas mb-3 leading-[1.3]">
                   {feature.title}
                 </h3>
-                <p className="text-cream/50 text-sm leading-relaxed font-light">
+                <p className="font-serif text-canvas/50 text-sm leading-relaxed">
                   {feature.description}
                 </p>
 
                 {/* Bottom accent */}
-                <div className="mt-8 w-8 h-px bg-tan/30 group-hover:w-16 group-hover:bg-tan/60 transition-all duration-500" />
+                <div className="mt-8 w-8 h-px bg-accent/30 group-hover:w-16 group-hover:bg-accent/70 transition-all duration-500" />
               </div>
             );
           })}

@@ -5,10 +5,11 @@ import { gsap } from "@/lib/gsap";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const navLinks = [
-  { label: "Why CNY Open House", href: "#why" },
+  { label: "Why CNY's Open House", href: "#why" },
+  { label: "Our Work", href: "#portfolio" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Newsletter", href: "#newsletter" },
-  { label: "Become the Expert", href: "#newsletter" },
+  { label: "Contact Us", href: "#contact" },
+  { label: "Become the Expert", href: "#contact" },
 ];
 
 // SVG brand icons (lucide-react removed brand icons in v0.263+)
@@ -37,10 +38,10 @@ const XIcon = () => (
 );
 
 const socialLinks = [
-  { Icon: FacebookIcon, href: "https://facebook.com", label: "Facebook" },
-  { Icon: InstagramIcon, href: "https://instagram.com", label: "Instagram" },
-  { Icon: YoutubeIcon, href: "https://youtube.com", label: "YouTube" },
-  { Icon: XIcon, href: "https://twitter.com", label: "Twitter / X" },
+  { Icon: FacebookIcon, href: "http://facebook.com/cnyopenhouse", label: "Facebook" },
+  { Icon: InstagramIcon, href: "http://instagram.com/cnyopenhouse", label: "Instagram" },
+  { Icon: XIcon, href: "http://twitter.com/cnyopenhouse", label: "Twitter / X" },
+  { Icon: YoutubeIcon, href: "https://www.youtube.com/user/CNYOpenHouse", label: "YouTube" },
 ];
 
 const platforms = ["Local TV", "Video", "Podcasts", "Mobile Apps", "Digital"];
@@ -85,8 +86,8 @@ export default function Footer() {
           {/* Col 1: Brand */}
           <div className="footer-col opacity-0 lg:col-span-1">
             <div className="mb-6">
-              <h3 className="font-serif text-2xl text-cream font-bold tracking-tight">
-                CNY Open House
+              <h3 className="font-sans font-bold text-2xl text-canvas tracking-tight">
+                CNY&apos;s Open House
               </h3>
               <div className="w-8 h-px bg-tan mt-3 mb-4" />
               <p className="text-xs text-tan/80 tracking-[0.2em] uppercase">
@@ -203,8 +204,8 @@ export default function Footer() {
 
             {/* CTA */}
             <a
-              href="#newsletter"
-              className="mt-8 inline-flex items-center gap-2 text-xs font-medium tracking-[0.18em] uppercase text-tan border border-tan/30 px-5 py-3 hover:bg-tan hover:text-charcoal transition-all duration-300"
+              href="#contact"
+              className="mt-8 inline-flex items-center gap-2 text-xs font-sans font-medium tracking-[0.18em] uppercase text-cream/50 border border-cream/15 px-5 py-3 hover:text-cream hover:border-cream/40 transition-all duration-300"
             >
               Become the Expert
             </a>
@@ -216,7 +217,7 @@ export default function Footer() {
       <div className="border-t border-cream/8">
         <div className="section-padding max-w-screen-xl mx-auto py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-cream/25 tracking-wide">
-            © {new Date().getFullYear()} CNY Open House. All rights reserved.
+            © {new Date().getFullYear()} CNY&apos;s Open House. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <a

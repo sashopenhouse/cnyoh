@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -10,47 +10,22 @@ export default function Hero() {
   const subRef = useRef<HTMLParagraphElement>(null);
   const metaRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Entrance timeline
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.fromTo(
-        metaRef.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.6 }
-      )
-        .fromTo(
-          headlineRef.current,
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 1 },
-          "-=0.3"
-        )
-        .fromTo(
-          subRef.current,
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.5"
-        )
-        .fromTo(
-          ctaRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          "-=0.4"
-        )
-        .fromTo(
-          videoRef.current,
-          { opacity: 0, y: 48, scale: 0.97 },
-          { opacity: 1, y: 0, scale: 1, duration: 1 },
-          "-=0.3"
-        );
+      tl.fromTo(metaRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 })
+        .fromTo(headlineRef.current, { opacity: 0, y: 48 }, { opacity: 1, y: 0, duration: 1.1 }, "-=0.3")
+        .fromTo(subRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.5")
+        .fromTo(ctaRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7 }, "-=0.4")
+        .fromTo(statsRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.3");
 
-      // Parallax on background
+      // Subtle parallax on bg decorations
       gsap.to(bgRef.current, {
-        yPercent: 25,
+        yPercent: 20,
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -67,140 +42,97 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-cream grain-overlay"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-canvas"
     >
-      {/* Decorative background elements */}
+      {/* Background decorations */}
       <div
         ref={bgRef}
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
       >
-        {/* Warm gradient wash */}
-        <div className="absolute top-0 right-0 w-[55%] h-full bg-gradient-to-l from-warm-100 to-transparent opacity-60" />
-        {/* Tan accent line */}
-        <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-tan/30 to-transparent" />
-        {/* Large decorative circle */}
-        <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full border border-tan/15" />
-        <div className="absolute -top-16 -right-16 w-[400px] h-[400px] rounded-full border border-tan/10" />
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(74,111,165,1) 1px, transparent 1px), linear-gradient(90deg, rgba(74,111,165,1) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+          }}
+        />
+        {/* Radial glow top-right */}
+        <div className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full bg-accent/5 blur-3xl" />
+        {/* Accent vertical rule */}
+        <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-accent/15 to-transparent" />
       </div>
 
-      <div className="relative z-10 section-padding max-w-screen-xl mx-auto w-full pt-32 pb-20">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left: Copy */}
-          <div className="space-y-8">
-            {/* Meta label */}
-            <div ref={metaRef} className="opacity-0 flex items-center gap-4">
-              <span className="label-tag">CNY Open House</span>
-              <div className="divider" />
-              <span className="label-tag">Since 2007</span>
-            </div>
+      {/* Main content — centered, full-width, generous breathing room */}
+      <div className="relative z-10 section-padding max-w-screen-lg mx-auto w-full pt-40 pb-28">
+        <div className="space-y-10">
 
-            {/* Headline */}
-            <h1
-              ref={headlineRef}
-              className="opacity-0 font-serif text-display-xl text-charcoal leading-[1.04]"
-            >
-              Local Experts.
-              <br />
-              <em className="not-italic text-tan">Modern Media.</em>
-            </h1>
-
-            {/* Subheadline */}
-            <p
-              ref={subRef}
-              className="opacity-0 text-lg md:text-xl text-charcoal/70 font-light leading-relaxed max-w-md"
-            >
-              Positioning your business as the authority in Central New York
-              since 2007. We turn your expertise into compelling content that
-              reaches thousands.
-            </p>
-
-            {/* CTA group */}
-            <div
-              ref={ctaRef}
-              className="opacity-0 flex flex-col sm:flex-row gap-4 pt-2"
-            >
-              <a href="#newsletter" className="btn-primary group">
-                Become the Expert
-                <ArrowRight
-                  size={16}
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </a>
-              <a href="#how-it-works" className="btn-outline">
-                See How It Works
-              </a>
-            </div>
-
-            {/* Social proof strip */}
-            <div className="flex items-center gap-6 pt-4 border-t border-charcoal/10">
-              <div className="text-center">
-                <p className="font-serif text-2xl font-bold text-charcoal">17+</p>
-                <p className="text-xs text-charcoal/50 tracking-wider uppercase">Years Local</p>
-              </div>
-              <div className="w-px h-10 bg-charcoal/10" />
-              <div className="text-center">
-                <p className="font-serif text-2xl font-bold text-charcoal">4</p>
-                <p className="text-xs text-charcoal/50 tracking-wider uppercase">Platforms</p>
-              </div>
-              <div className="w-px h-10 bg-charcoal/10" />
-              <div className="text-center">
-                <p className="font-serif text-2xl font-bold text-charcoal">100s</p>
-                <p className="text-xs text-charcoal/50 tracking-wider uppercase">Businesses Served</p>
-              </div>
-            </div>
+          {/* Meta label */}
+          <div ref={metaRef} className="opacity-0 flex items-center gap-4">
+            <span className="label-tag">CNY&apos;s Open House</span>
+            <div className="divider" />
+            <span className="label-tag">Since 2007</span>
           </div>
 
-          {/* Right: Video placeholder */}
-          <div ref={videoRef} className="opacity-0 relative">
-            {/* Video container */}
-            <div className="relative aspect-[4/3] bg-warm-200 overflow-hidden shadow-elevated group cursor-pointer">
-              {/* Placeholder gradient — swap for actual video */}
-              <div className="absolute inset-0 bg-gradient-to-br from-warm-300 via-tan/40 to-warm-200" />
+          {/* Headline — large, full-width, no column constraint */}
+          <h1
+            ref={headlineRef}
+              className="opacity-0 font-sans font-bold text-display-xl text-ink tracking-tight max-w-4xl"
+          >
+            Local Experts.
+            <br />
+            <span className="text-accent">Modern Media.</span>
+          </h1>
 
-              {/* Texture overlay */}
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage:
-                    "repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(210,180,140,0.3) 2px, rgba(210,180,140,0.3) 4px)",
-                }}
+          {/* Subheadline */}
+          <p
+            ref={subRef}
+            className="opacity-0 font-serif text-xl md:text-2xl text-ink/60 leading-relaxed max-w-2xl"
+          >
+            Positioning your business as the authority in Central New York
+            since 2007. We turn your expertise into compelling content that
+            reaches thousands across TV, video, podcasts, and apps.
+          </p>
+
+          {/* CTAs */}
+          <div ref={ctaRef} className="opacity-0 flex flex-col sm:flex-row gap-4 pt-2">
+              <a href="#contact" className="btn-primary group">
+              Become the Expert
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
               />
+            </a>
+            <a href="#how-it-works" className="btn-outline">
+              See How It Works
+            </a>
+          </div>
 
-              {/* Play button */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-cream/90 backdrop-blur-sm flex items-center justify-center shadow-card transition-transform duration-300 group-hover:scale-110">
-                  <Play
-                    size={28}
-                    className="text-charcoal ml-1"
-                    fill="currentColor"
-                  />
+          {/* Stats row */}
+          <div ref={statsRef} className="opacity-0 pt-8 border-t border-ink/8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-ink/8 overflow-hidden">
+              {[
+                { value: "17+", label: "Years Local" },
+                { value: "4", label: "Platforms" },
+                { value: "100s", label: "Businesses Served" },
+                { value: "CNY", label: "Region Focus" },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-canvas flex flex-col items-center justify-center text-center py-6 px-4">
+                  <p className="font-sans font-bold text-4xl text-ink leading-none tracking-tight">{stat.value}</p>
+                  <p className="font-sans text-[10px] text-ink/40 tracking-[0.18em] uppercase mt-2">{stat.label}</p>
                 </div>
-              </div>
-
-              {/* Caption */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-charcoal/60 to-transparent">
-                <p className="text-cream/90 text-sm font-medium tracking-wide">
-                  Watch: How CNY Open House Works
-                </p>
-                <p className="text-cream/60 text-xs mt-1">
-                  {/* Replace with actual video URL */}
-                  Video coming soon — placeholder for future underlay
-                </p>
-              </div>
+              ))}
             </div>
-
-            {/* Decorative offset border */}
-            <div className="absolute -bottom-4 -right-4 w-full h-full border border-tan/40 -z-10" />
-            <div className="absolute -bottom-8 -right-8 w-full h-full border border-tan/20 -z-20" />
           </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-        <span className="text-xs tracking-[0.2em] uppercase text-charcoal">Scroll</span>
-        <div className="w-px h-12 bg-charcoal/40 animate-pulse" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
+        <span className="font-sans text-xs tracking-[0.2em] uppercase text-ink">Scroll</span>
+        <div className="w-px h-12 bg-ink/40 animate-pulse" />
       </div>
     </section>
   );

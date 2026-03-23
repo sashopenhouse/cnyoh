@@ -9,51 +9,64 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        tan: {
-          DEFAULT: "#D2B48C",
-          light: "#E8D5B7",
-          dark: "#B8956A",
+        // Primary palette — cool, unisex, tech-forward
+        accent: {
+          DEFAULT: "#4A6FA5",
+          light: "#6B8FC4",
+          dark: "#2E4F7A",
         },
+        canvas: {
+          DEFAULT: "#F8F9FB",
+          dark: "#EEF0F5",
+        },
+        ink: {
+          DEFAULT: "#1E2028",
+          light: "#3A3D4A",
+          muted: "#6B6F7E",
+        },
+        mist: {
+          DEFAULT: "#EEF0F5",
+          dark: "#D8DCE8",
+        },
+        steel: {
+          DEFAULT: "#8A9BB5",
+          light: "#B0BECE",
+          dark: "#5A6B85",
+        },
+        // Keep these for backward compat during transition
         cream: {
-          DEFAULT: "#FDFBF7",
-          dark: "#F5F0E8",
+          DEFAULT: "#F8F9FB",
+          dark: "#EEF0F5",
         },
         charcoal: {
-          DEFAULT: "#333333",
-          light: "#555555",
-          dark: "#1A1A1A",
+          DEFAULT: "#1E2028",
+          light: "#3A3D4A",
+          dark: "#0F1015",
         },
-        sage: {
-          DEFAULT: "#7C8C6E",
-          light: "#A3B08F",
-          dark: "#5A6650",
-        },
-        earth: {
-          DEFAULT: "#8B6914",
-          light: "#A67C1F",
-          dark: "#6B4F0F",
-        },
-        warm: {
-          50: "#FDFBF7",
-          100: "#F5F0E8",
-          200: "#EDE4D3",
-          300: "#E0D0B8",
-          400: "#D2B48C",
-          500: "#C49A6C",
-          600: "#B8956A",
-          700: "#8B6914",
-          800: "#6B4F0F",
-          900: "#333333",
+        // Neutral scale
+        neutral: {
+          50: "#F8F9FB",
+          100: "#EEF0F5",
+          200: "#D8DCE8",
+          300: "#B8BECE",
+          400: "#8A9BB5",
+          500: "#5A6B85",
+          600: "#3A4D6A",
+          700: "#2A3A55",
+          800: "#1E2028",
+          900: "#0F1015",
         },
       },
       fontFamily: {
-        serif: ["var(--font-playfair)", "Georgia", "serif"],
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        // DM Sans — geometric, tech-forward, unisex (headings)
+        sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
+        // Lora — refined editorial serif (body/paragraphs)
+        serif: ["var(--font-lora)", "Georgia", "serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(3rem, 8vw, 7rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
-        "display-lg": ["clamp(2.25rem, 5vw, 4.5rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        "display-md": ["clamp(1.75rem, 3.5vw, 3rem)", { lineHeight: "1.15", letterSpacing: "-0.01em" }],
+        "display-xl": ["clamp(3rem, 8vw, 6.5rem)", { lineHeight: "1.0", letterSpacing: "-0.03em" }],
+        "display-lg": ["clamp(2.25rem, 5vw, 4rem)", { lineHeight: "1.05", letterSpacing: "-0.025em" }],
+        "display-md": ["clamp(1.75rem, 3.5vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
       },
       spacing: {
         section: "7rem",
