@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const navItems = [
   { label: "Why Us", href: "#why" },
@@ -42,18 +43,15 @@ export default function Navbar() {
       <div className="section-padding max-w-screen-xl mx-auto">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 border border-tan flex items-center justify-center">
-              <span className="font-sans font-bold text-xs text-accent">C</span>
-            </div>
-            <div>
-              <span className="font-sans font-bold text-base text-ink tracking-tight leading-none block">
-                CNY&apos;s Open House
-              </span>
-              <span className="text-[10px] text-tan tracking-[0.2em] uppercase leading-none">
-                Since 2007
-              </span>
-            </div>
+          <a href="#" className="flex items-center group">
+            <Image
+              src="/logo.png"
+              alt="CNY's Open House"
+              width={140}
+              height={40}
+              className="h-6 w-auto object-contain"
+              priority
+            />
           </a>
 
           {/* Desktop nav */}

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { Mail, Phone, MapPin } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Why CNY's Open House", href: "#why" },
@@ -86,11 +87,15 @@ export default function Footer() {
           {/* Col 1: Brand */}
           <div className="footer-col opacity-0 lg:col-span-1">
             <div className="mb-6">
-              <h3 className="font-sans font-bold text-2xl text-canvas tracking-tight">
-                CNY&apos;s Open House
-              </h3>
-              <div className="w-8 h-px bg-tan mt-3 mb-4" />
-              <p className="text-xs text-tan/80 tracking-[0.2em] uppercase">
+              <Image
+                src="/logo.png"
+                alt="CNY's Open House"
+                width={160}
+                height={46}
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
+              <div className="w-8 h-px bg-accent/40 mt-5 mb-4" />
+              <p className="font-sans text-xs text-canvas/40 tracking-[0.2em] uppercase">
                 Since 2007
               </p>
             </div>

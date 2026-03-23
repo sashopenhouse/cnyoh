@@ -94,25 +94,42 @@ export default function Watch() {
       <div className="relative z-10 section-padding max-w-screen-xl mx-auto">
 
         {/* Header */}
-        <div ref={headingRef} className="opacity-0 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-          <div>
-            <span className="label-tag text-accent/80">On YouTube</span>
-            <div className="divider mt-4 mb-6" />
-            <h2 className="font-sans font-bold text-display-lg text-canvas tracking-tight">
-              Watch Us
-              <br />
-              <span className="text-accent">In Action</span>
-            </h2>
+        <div ref={headingRef} className="opacity-0 mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <span className="label-tag text-accent/80">The TV Show</span>
+              <div className="divider mt-4 mb-6" />
+              <h2 className="font-sans font-bold text-display-lg text-canvas tracking-tight">
+                CNY&apos;s Original
+                <br />
+                <span className="text-accent">Home Improvement Show</span>
+              </h2>
+            </div>
+            <a
+              href={CHANNEL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 font-sans text-xs font-medium tracking-[0.18em] uppercase text-canvas/40 hover:text-accent transition-colors duration-200 group self-start md:self-auto"
+            >
+              View Full Channel
+              <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+            </a>
           </div>
-          <a
-            href={CHANNEL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 font-sans text-xs font-medium tracking-[0.18em] uppercase text-canvas/40 hover:text-accent transition-colors duration-200 group self-start md:self-auto"
-          >
-            View Full Channel
-            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-          </a>
+
+          {/* Show credentials bar */}
+          <div className="flex flex-wrap items-center gap-px bg-canvas/5">
+            {[
+              { value: "Since 2007", label: "On Air" },
+              { value: "CNY", label: "Local TV" },
+              { value: "Ongoing", label: "New Episodes" },
+              { value: "+ Digital", label: "YouTube · Podcast · Apps" },
+            ].map((item) => (
+              <div key={item.label} className="bg-ink flex-1 min-w-[120px] px-6 py-4 border-r border-canvas/5 last:border-0">
+                <p className="font-sans font-bold text-canvas text-lg leading-none tracking-tight">{item.value}</p>
+                <p className="font-sans text-[10px] text-canvas/35 tracking-[0.18em] uppercase mt-1.5">{item.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-[1fr_380px] gap-6 lg:gap-8 items-start">
@@ -155,9 +172,9 @@ export default function Watch() {
                 </div>
                 {/* Label */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-ink/80 to-transparent">
-                  <p className="font-sans text-xs text-canvas/50 tracking-widest uppercase mb-1">Featured</p>
+                  <p className="font-sans text-xs text-canvas/50 tracking-widest uppercase mb-1">Latest Episode</p>
                   <p className="font-sans font-semibold text-canvas text-lg leading-snug tracking-tight">
-                    See How CNY&apos;s Open House Works
+                    CNY&apos;s Open House — Watch the Latest Episode
                   </p>
                 </div>
               </button>
