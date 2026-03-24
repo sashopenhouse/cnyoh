@@ -12,26 +12,26 @@ const FEATURED_VIDEO_ID = "aNd9SLdxe14";
 
 const recentVideos = [
   {
-    id: "dQw4w9WgXcQ", // ← swap
-    title: "Roofing Season in CNY: What Homeowners Need to Know",
-    duration: "8:42",
+    id: "XCRJ26zEWAQ",
+    title: "Why Home Shows Still Matter for Homeowners in CNY | Weekend Projects Ep. 1",
+    duration: "",
   },
   {
-    id: "dQw4w9WgXcQ", // ← swap
-    title: "Kitchen Remodel Trends for 2025 with Lakeside Kitchen & Bath",
-    duration: "11:15",
+    id: "3N1W636snB4",
+    title: "Open Doors to Utica Creative Reuse",
+    duration: "",
   },
   {
-    id: "dQw4w9WgXcQ", // ← swap
-    title: "Is Your HVAC Ready for Winter? Premier HVAC Explains",
-    duration: "6:30",
+    id: "ZnammALnSvw",
+    title: "Cyber Security Essentials: How to Protect Your Personal Information | First Source",
+    duration: "",
   },
 ];
 
 const CHANNEL_URL = "https://www.youtube.com/@CNYOpenHouse";
 
 function VideoThumbnail({ videoId }: { videoId: string }) {
-  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 }
 
 export default function Watch() {
@@ -208,9 +208,11 @@ export default function Watch() {
                     </div>
                   </div>
                   {/* Duration badge */}
-                  <span className="absolute bottom-1 right-1 font-sans text-[10px] text-canvas bg-ink/80 px-1.5 py-0.5 leading-none">
-                    {video.duration}
-                  </span>
+                  {video.duration && (
+                    <span className="absolute bottom-1 right-1 font-sans text-[10px] text-canvas bg-ink/80 px-1.5 py-0.5 leading-none">
+                      {video.duration}
+                    </span>
+                  )}
                 </div>
 
                 {/* Info */}

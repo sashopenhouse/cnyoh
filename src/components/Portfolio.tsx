@@ -6,60 +6,58 @@ import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
-    title: "Apex Roofing & Exteriors",
+    title: "Geraty Pools & Spa",
     description:
-      "Monthly TV segments and a podcast series positioning Apex as CNY's go-to roofing authority. 3x increase in inbound leads within 6 months.",
-    tags: ["TV Segments", "Podcast", "Digital"],
-    href: "https://example.com",
-    // Replace with real image path: e.g. "/portfolio/apex-roofing.jpg"
-    image: null,
+      "Full TV and video series showcasing Geraty's expertise in pool design, installation, and spa services across Central New York.",
+    tags: ["TV Segments", "Video Series", "Digital"],
+    href: "https://www.youtube.com/playlist?list=PL87322718A0428AB9",
+    image: "https://img.youtube.com/vi/scBKuzJwtYE/hqdefault.jpg",
     accent: "from-accent/20 to-mist",
   },
   {
-    title: "Lakeside Kitchen & Bath",
+    title: "Fred F. Collis & Sons",
     description:
-      "Full content campaign across video, social, and app distribution. Showcased their design process and drove showroom foot traffic.",
-    tags: ["Video", "Social", "Apps"],
-    href: "https://example.com",
-    image: null,
+      "A long-running TV and video series highlighting Collis & Sons' decades of expertise in home improvement across Central New York.",
+    tags: ["TV Segments", "Video Series", "Digital"],
+    href: "https://www.youtube.com/playlist?list=PLE1F1F0C0E779986E",
+    image: "https://img.youtube.com/vi/TO14Lv--ppU/hqdefault.jpg",
     accent: "from-steel/20 to-mist",
   },
   {
-    title: "CNY Windows & Doors",
+    title: "Roofing King",
     description:
-      "Seasonal TV spots and a digital series on energy efficiency. Established the brand as the trusted local expert before peak season.",
-    tags: ["TV", "Video Series", "SEO Content"],
-    href: "https://example.com",
-    image: null,
+      "TV segments and a video series positioning Roofing King as CNY's trusted roofing authority — from inspections to full replacements.",
+    tags: ["TV Segments", "Video Series", "Digital"],
+    href: "https://www.youtube.com/playlist?list=PLT6BTW0K9K1NFrNTPjrIYtl0FGjkue-ou",
+    image: "https://img.youtube.com/vi/sE9vRosha94/hqdefault.jpg",
     accent: "from-neutral-300/40 to-mist",
   },
   {
-    title: "Greenfield Landscaping",
+    title: "Clinton Tractor",
     description:
-      "Year-round content strategy spanning podcast interviews, video walkthroughs, and app features — keeping Greenfield top-of-mind all season.",
-    tags: ["Podcast", "Video", "Apps"],
-    href: "https://example.com",
-    image: null,
+      "A featured segment showcasing Clinton Tractor's equipment expertise and local service — connecting CNY's farming and landscaping community with the right tools.",
+    tags: ["TV Segments", "Video", "Digital"],
+    href: "https://www.youtube.com/watch?v=OIXJY9S_r48",
+    image: "https://img.youtube.com/vi/OIXJY9S_r48/hqdefault.jpg",
     accent: "from-accent/10 to-canvas",
   },
   {
-    title: "Premier HVAC Solutions",
+    title: "New York Sash",
     description:
-      "Emergency-season TV campaign paired with evergreen digital content. Positioned Premier as the reliable choice when CNY homeowners need help fast.",
-    tags: ["TV", "Digital", "Podcast"],
-    href: "https://example.com",
-    image: null,
+      "A full video series showcasing New York Sash's premium windows and doors — helping CNY homeowners understand the value of quality installations.",
+    tags: ["TV Segments", "Video Series", "Digital"],
+    href: "https://www.youtube.com/playlist?list=PL07E390EDB352D45B",
+    image: "https://img.youtube.com/vi/oTWyUPoWMoM/hqdefault.jpg",
     accent: "from-steel/15 to-canvas",
   },
   {
-    title: "Your Business Here",
+    title: "Lincoln Davies Building Supply",
     description:
-      "Ready to become the recognized expert in your category? We have one spot available per industry — and it could be yours.",
-    tags: ["TV", "Video", "Podcast", "Apps"],
-    href: "#contact",
-    image: null,
+      "A featured TV segment showcasing Lincoln Davies' extensive selection of building materials and expert guidance for CNY contractors and homeowners.",
+    tags: ["TV Segments", "Video", "Digital"],
+    href: "https://www.youtube.com/watch?v=NPrB3-aRT9U",
+    image: "https://img.youtube.com/vi/NPrB3-aRT9U/hqdefault.jpg",
     accent: "from-accent/30 to-accent/5",
-    cta: true,
   },
 ];
 
@@ -157,6 +155,12 @@ export default function Portfolio() {
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    onError={(e) => {
+                      const img = e.target as HTMLImageElement;
+                      if (img.src.includes("hqdefault")) {
+                        img.src = img.src.replace("hqdefault", "mqdefault");
+                      }
+                    }}
                   />
                 ) : (
                   /* Placeholder pattern */

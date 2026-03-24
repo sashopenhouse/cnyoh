@@ -88,11 +88,11 @@ export default function Footer() {
           <div className="footer-col opacity-0 lg:col-span-1">
             <div className="mb-6">
               <Image
-                src="/logo.png"
+                src="/logo-dark.png"
                 alt="CNY's Open House"
-                width={160}
-                height={46}
-                className="h-10 w-auto object-contain brightness-0 invert"
+                width={320}
+                height={160}
+                className="h-32 w-auto object-contain object-left block"
               />
               <div className="w-8 h-px bg-accent/40 mt-5 mb-4" />
               <p className="font-sans text-xs text-canvas/40 tracking-[0.2em] uppercase">
@@ -186,13 +186,13 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="tel:+1" className="flex items-start gap-3 group">
+                <a href="tel:+13156247344" className="flex items-start gap-3 group">
                   <Phone
                     size={15}
                     className="text-tan/60 mt-0.5 flex-shrink-0 group-hover:text-tan transition-colors"
                   />
                   <span className="text-sm text-cream/50 group-hover:text-cream/80 transition-colors">
-                    Contact us for details
+                    (315) 624-7344
                   </span>
                 </a>
               </li>
@@ -224,20 +224,7 @@ export default function Footer() {
           <p className="text-xs text-cream/25 tracking-wide">
             © {new Date().getFullYear()} CNY&apos;s Open House. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <a
-              href="#"
-              className="text-xs text-cream/25 hover:text-cream/50 transition-colors"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="text-xs text-cream/25 hover:text-cream/50 transition-colors"
-            >
-              Terms of Service
-            </a>
-          </div>
+          <div />
           <p className="text-xs text-cream/20 tracking-widest uppercase">
             Established 2007
           </p>
