@@ -145,7 +145,7 @@ export default function Portfolio() {
               href={project.href}
               target={project.href.startsWith("http") ? "_blank" : undefined}
               rel={project.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className={`portfolio-card opacity-0 group relative bg-canvas flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card ${project.cta ? "ring-1 ring-accent/30" : ""}`}
+              className="portfolio-card opacity-0 group relative bg-canvas flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card"
             >
               {/* Image area */}
               <div className={`relative h-52 bg-gradient-to-br ${project.accent} overflow-hidden flex-shrink-0`}>
@@ -173,15 +173,9 @@ export default function Portfolio() {
                         backgroundSize: "24px 24px",
                       }}
                     />
-                    {project.cta ? (
-                      <span className="font-sans font-bold text-accent text-sm tracking-widest uppercase">
-                        Your Logo Here
-                      </span>
-                    ) : (
-                      <span className="font-sans text-ink/20 text-xs tracking-widest uppercase">
+                    <span className="font-sans text-ink/20 text-xs tracking-widest uppercase">
                         Add image
                       </span>
-                    )}
                   </div>
                 )}
 
@@ -205,7 +199,7 @@ export default function Portfolio() {
                   ))}
                 </div>
 
-                <h3 className={`font-sans font-semibold text-xl text-ink mb-3 leading-[1.3] tracking-tight ${project.cta ? "text-accent" : ""}`}>
+                <h3 className="font-sans font-semibold text-xl text-ink mb-3 leading-[1.3] tracking-tight">
                   {project.title}
                 </h3>
 
@@ -215,7 +209,7 @@ export default function Portfolio() {
 
                 {/* Link label */}
                 <div className="mt-6 flex items-center gap-2 text-xs font-sans font-medium tracking-widest uppercase text-accent group-hover:gap-3 transition-all duration-200">
-                  <span>{project.cta ? "Get Started" : "View Project"}</span>
+                  <span>View Project</span>
                   <ArrowUpRight size={13} />
                 </div>
               </div>
