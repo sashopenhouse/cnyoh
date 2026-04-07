@@ -20,13 +20,53 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "CNY's Open House | Local Experts. Modern Media.",
+  metadataBase: new URL("https://cnyopenhouse.com"),
+  title: {
+    default: "CNY's Open House | Local Experts. Modern Media.",
+    template: "%s | CNY's Open House",
+  },
   description:
-    "Positioning your business as the authority in Central New York since 2007. TV, video, podcasts, and digital distribution.",
+    "CNY's Open House is Central New York's leading home improvement show and media platform. TV, video, podcasts, and digital distribution since 2007.",
+  alternates: {
+    canonical: "https://cnyopenhouse.com/",
+  },
+  keywords: [
+    "CNY's Open House",
+    "Central New York home improvement show",
+    "home improvement TV show",
+    "local TV segments",
+    "CNY media platform",
+    "home improvement experts",
+    "Utica home show",
+    "Syracuse home improvement",
+    "Mohawk Valley contractors",
+    "home improvement podcast",
+  ],
   openGraph: {
     title: "CNY's Open House | Local Experts. Modern Media.",
-    description: "Positioning your business as the authority since 2007.",
+    description:
+      "Central New York's leading home improvement show and media platform since 2007.",
     siteName: "CNY's Open House",
+    type: "website",
+    locale: "en_US",
+    url: "https://cnyopenhouse.com/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CNY's Open House | Local Experts. Modern Media.",
+    description:
+      "Central New York's leading home improvement show and media platform since 2007.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
