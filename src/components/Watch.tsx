@@ -10,7 +10,7 @@ import { Play, ArrowUpRight } from "lucide-react";
 // ─────────────────────────────────────────────
 const FEATURED_VIDEO_ID = "aNd9SLdxe14";
 
-const recentVideos = [
+const fallbackRecentVideos = [
   {
     id: "XCRJ26zEWAQ",
     title: "Why Home Shows Still Matter for Homeowners in CNY | Weekend Projects Ep. 1",
@@ -40,6 +40,7 @@ export default function Watch() {
   const featuredRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [recentVideos, setRecentVideos] = useState(fallbackRecentVideos);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -71,6 +72,47 @@ export default function Watch() {
       }
     }, sectionRef);
     return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadRecentVideos = async () => {
+      try {
+        const response = await fetch("/api/youtube/recent", { cache: "no-store" });
+        if (!response.ok) {
+          return;
+        }
+
+        const data = (await response.json()) as {
+          videos?: Array<{ id: string; title: string; publishedAt?: string }>;
+        };
+
+        const latest = (data.videos ?? [])
+          .filter((video) => video.id && video.id !== FEATURED_VIDEO_ID)
+          .map((video) => ({
+            id: video.id,
+            title: video.title,
+            duration: "",
+          }));
+
+        const merged = [...latest, ...fallbackRecentVideos]
+          .filter((video) => video.id !== FEATURED_VIDEO_ID)
+          .filter((video, index, list) => list.findIndex((item) => item.id === video.id) === index)
+          .slice(0, 3);
+
+        if (isActive && merged.length > 0) {
+          setRecentVideos(merged);
+        }
+      } catch {
+      }
+    };
+
+    loadRecentVideos();
+
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   return (
