@@ -79,7 +79,10 @@ export default function Watch() {
 
     const loadRecentVideos = async () => {
       try {
-        const response = await fetch("/api/youtube/recent", { cache: "no-store" });
+        const response = await fetch(
+          `/api/youtube/recent?exclude=${FEATURED_VIDEO_ID}&limit=3`,
+          { cache: "no-store" }
+        );
         if (!response.ok) {
           return;
         }
@@ -89,20 +92,16 @@ export default function Watch() {
         };
 
         const latest = (data.videos ?? [])
-          .filter((video) => video.id && video.id !== FEATURED_VIDEO_ID)
+          .filter((video) => video.id)
           .map((video) => ({
             id: video.id,
             title: video.title,
             duration: "",
-          }));
-
-        const merged = [...latest, ...fallbackRecentVideos]
-          .filter((video) => video.id !== FEATURED_VIDEO_ID)
-          .filter((video, index, list) => list.findIndex((item) => item.id === video.id) === index)
+          }))
           .slice(0, 3);
 
-        if (isActive && merged.length > 0) {
-          setRecentVideos(merged);
+        if (isActive && latest.length > 0) {
+          setRecentVideos(latest);
         }
       } catch {
       }

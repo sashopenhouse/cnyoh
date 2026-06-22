@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 
 const CHANNEL_HANDLE = "@CNYOpenHouse";
-const MAX_RESULTS = 4;
+const MAX_RESULTS = 12;
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 type RecentVideo = {
   id: string;
@@ -19,8 +22,22 @@ function decodeXmlEntities(value: string) {
 }
 
 function findChannelId(channelHtml: string) {
-  const match = channelHtml.match(/"channelId":"(UC[\w-]{22})"/);
-  return match?.[1] ?? null;
+  const canonicalMatch = channelHtml.match(
+    /rel="canonical" href="https:\/\/www\.youtube\.com\/channel\/(UC[\w-]{22})"/
+  );
+  if (canonicalMatch?.[1]) {
+    return canonicalMatch[1];
+  }
+
+  const rssUrlMatch = channelHtml.match(
+    /"rssUrl":"https:\/\/www\.youtube\.com\/feeds\/videos\.xml\?channel_id=(UC[\w-]{22})"/
+  );
+  if (rssUrlMatch?.[1]) {
+    return rssUrlMatch[1];
+  }
+
+  const fallbackMatch = channelHtml.match(/"channelId":"(UC[\w-]{22})"/);
+  return fallbackMatch?.[1] ?? null;
 }
 
 function parseVideosFromFeed(xml: string): RecentVideo[] {
@@ -46,10 +63,17 @@ function parseVideosFromFeed(xml: string): RecentVideo[] {
     .slice(0, MAX_RESULTS);
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const exclude = searchParams.get("exclude")?.trim();
+    const requestedLimit = Number(searchParams.get("limit") ?? "4");
+    const limit = Number.isFinite(requestedLimit)
+      ? Math.max(1, Math.min(requestedLimit, MAX_RESULTS))
+      : 4;
+
     const channelPageResponse = await fetch(`https://www.youtube.com/${CHANNEL_HANDLE}`, {
-      next: { revalidate: 900 },
+      cache: "no-store",
       headers: {
         "User-Agent": "Mozilla/5.0",
       },
@@ -66,17 +90,23 @@ export async function GET() {
       return NextResponse.json({ videos: [] }, { status: 200 });
     }
 
-    const feedResponse = await fetch(
-      `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
-      { next: { revalidate: 900 } }
-    );
+    const feedResponse = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
+      cache: "no-store",
+    });
 
     if (!feedResponse.ok) {
       return NextResponse.json({ videos: [] }, { status: 200 });
     }
 
     const feedXml = await feedResponse.text();
-    const videos = parseVideosFromFeed(feedXml);
+    const videos = parseVideosFromFeed(feedXml)
+      .filter((video) => !exclude || video.id !== exclude)
+      .sort((a, b) => {
+        const aTime = Date.parse(a.publishedAt);
+        const bTime = Date.parse(b.publishedAt);
+        return (Number.isNaN(bTime) ? 0 : bTime) - (Number.isNaN(aTime) ? 0 : aTime);
+      })
+      .slice(0, limit);
 
     return NextResponse.json({ videos }, { status: 200 });
   } catch {
